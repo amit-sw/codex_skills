@@ -31,12 +31,19 @@ Good question types:
 - compare two viewpoints
 - spot the strongest supporting evidence
 - infer what would happen if one assumption changes
+- explain a principle or tradeoff that would still matter outside this one class session
 
 Avoid:
 - rote definition recall when the concept is obvious from the study card
 - trivia that depends on one isolated phrase
 - ambiguous opinion questions with no grounded answer
 - questions whose only source is recap, review, or previous-session quiz material rather than the new instructional content
+- questions that mostly test session-specific coverage details, such as the exact count or names of items listed in class, when the enduring idea is more important than the list itself
+
+When deciding what to ask, prefer durable knowledge:
+- what principle should the learner remember later
+- what contrast or tradeoff matters beyond this one session
+- what misunderstanding would still matter in a new context
 
 ## Difficulty Tracks
 
@@ -55,6 +62,16 @@ Immediate feedback must teach, not just score.
 - correct feedback should reinforce the underlying idea briefly
 - incorrect feedback should explain why the chosen answer misses the point
 - explanations should reference the section meaning, not just repeat the right option
+
+## Multiple-Choice Option Quality
+
+Most options should be plausible to a thoughtful learner who only partially understands the section.
+
+Rules:
+- make distractors specific enough to feel possible
+- avoid one obviously verbose answer paired with thin throwaway distractors
+- keep the options similar in length, precision, and tone
+- let wrong answers fail for substantive reasons, not because they are flimsy
 
 ## Depth Setting
 

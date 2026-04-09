@@ -16,6 +16,10 @@ The section intro should prepare the learner, not rewrite the entire document. K
 
 If all questions are low-value recall, the quiz feels shallow. Even at `low` difficulty, some questions should test understanding rather than verbatim memory.
 
+## Session-Specific Trivia
+
+Questions like "which four items were listed" are usually weak unless the list itself is the enduring concept. Prefer asking about the underlying principle, comparison, advantage, limitation, or implication that the learner should retain later.
+
 ## Difficulty Tracks That Barely Differ
 
 If `low`, `medium`, and `deep` look interchangeable, the global difficulty selector becomes meaningless. Increase the reasoning load clearly as difficulty rises.
@@ -31,6 +35,10 @@ Every answer selection must update:
 - the global correct / incorrect count
 
 Resetting or changing difficulty must also bring those counters back into sync.
+
+## Longest-Answer Bias
+
+If the correct option is consistently the longest, learners will spot the pattern quickly. Wrong options should also be complete, plausible, and similar in length and specificity to the correct answer.
 
 ## Difficulty Switching Without Reset Rules
 

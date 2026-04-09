@@ -99,6 +99,9 @@ Rules:
 - after selection, that question locks
 - explanations appear immediately
 - difficulty tracks should contain parallel question sets for the same section topic
+- prefer enduring concepts over session-specific coverage details
+- keep answer options similar in length and specificity so the correct answer is not visually obvious
+- make distractors plausible enough that they fail on meaning, not on laziness
 
 ## Glossary Terms
 

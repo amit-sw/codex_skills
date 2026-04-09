@@ -148,10 +148,21 @@ Build the quiz from the document itself. Do not ask the user to summarize the co
 For each inferred section, define:
 - the section title
 - a short study summary
-- the most important knowledge to test
+- the most important enduring knowledge to test
 - question angles for `low`, `medium`, and `deep`
 
 If a section contains both recap and new instruction, summarize only the new instruction and generate questions only from that new material.
+
+Favor durable understanding over coverage trivia:
+- avoid questions that mainly test what happened to be listed, named, or counted in class
+- prefer questions about principles, contrasts, tradeoffs, implications, and why an idea matters
+- if a fact is only important because it appears in one class list, it is usually a poor quiz topic
+
+For multiple-choice writing:
+- make wrong answers plausible, specific, and well-formed
+- avoid obviously short, vague, or throwaway distractors
+- do not make the correct answer predictably longer than the others
+- keep option lengths and specificity in the same general range unless the source material genuinely requires otherwise
 
 Use `references/module-brief-template.md` as a section brief template if the document is long enough to benefit from explicit planning.
 
@@ -193,3 +204,5 @@ Avoid the current slate-blue course look. This should feel related in quality bu
 - Answers are checked immediately on click
 - Section and global score counters must remain accurate after grading, resetting, and difficulty changes
 - Do not generate quiz questions from upfront recap, review, or prior-session quiz material unless the user explicitly asks to be quizzed on that recap
+- Prefer enduring knowledge and transferable understanding over session-specific coverage trivia
+- Write distractors that look plausible and comparably developed; do not let answer length telegraph the correct choice
