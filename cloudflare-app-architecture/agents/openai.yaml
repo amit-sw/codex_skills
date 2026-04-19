@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloudflare App Architecture"
+  short_description: "Schovia Cloudflare app standard"
+  default_prompt: "Use $cloudflare-app-architecture to design or review this Cloudflare Worker app against the Schovia standard."
