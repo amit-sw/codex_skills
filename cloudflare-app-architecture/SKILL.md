@@ -74,6 +74,12 @@ Inside `src/worker`, preserve:
 - Prefer REST + SSE over GraphQL and WebSockets for this stack.
 - Call out deviations explicitly, including why the default pattern is insufficient.
 
+## Additional notes
+
+When building Cloudflare-first internal apps with a React SPA + Hono Worker, avoid splitting validation responsibility in a way that blocks server-side enrichment. Route handlers should not eagerly parse request bodies if downstream services need to resolve or normalize fields first, such as converting departmentName into departmentId, defaulting owner to requestor, or filling in other derived values. Keep business-shaping logic in the service layer, then validate the fully enriched payload there. Also make error handling explicit: Hono global error middleware should return structured JSON with error, field-level validation details, and a requestId, and the client request helper should parse that envelope into readable UI messages instead of surfacing raw JSON blobs or opaque “Internal server error” text.
+
+On the frontend, default to spreadsheet-style task management for enterprise CRUD surfaces rather than card-heavy layouts. Inline task tables should support auto-save, sortable columns, user-selectable visible columns, and row-level modal history, without persistent side inspectors that create duplicated or confusing empty states like “Select a task.” If authenticated identity comes from Cloudflare Access or Google, prefer showing names in the UI and keeping email as the stable backend identifier; dropdowns should render human-readable names even when values are emails. Finally, expose a build/version identifier in the UI by injecting the commit SHA at build time, using CI-provided commit env vars when available and a local git rev-parse --short HEAD fallback during development.
+
 ## Reference
 
 Read [references/architecture-design.md](./references/architecture-design.md) when you need the full standard, including stack rationale, runtime topology, storage split, async job lifecycle, deployment conventions, and the detailed Cloudflare Access guidance.
