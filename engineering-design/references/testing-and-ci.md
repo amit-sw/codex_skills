@@ -1,6 +1,6 @@
-# Testing and CI Reference
+# Testing and Cloudflare CI/CD Reference
 
-Use this reference when defining verification and GitHub deployment gates.
+Use this reference when defining verification and Cloudflare Workers GitHub deployment gates. Do not create or rely on GitHub Actions workflows.
 
 ## Minimum Test Set
 
@@ -20,9 +20,9 @@ Required for mission-critical Cloudflare services:
 
 Coverage targets are useful but insufficient. A small service can have high coverage and still miss queue retries, migration safety, or auth bypasses.
 
-## GitHub Checks for Auto-Deploy
+## Cloudflare Workers GitHub Auto-Deploy
 
-Automatic production deploy requires these checks to pass:
+Automatic production deploys must use Cloudflare Workers' GitHub integration. Validation should be defined as repository scripts that can run locally and in the Cloudflare build/deploy configuration:
 
 ```text
 npm ci
@@ -33,9 +33,9 @@ npm run build
 wrangler deploy --dry-run or equivalent validation
 ```
 
-Adapt command names to the repository, but keep the gate categories.
+Adapt command names to the repository, but keep the gate categories. Do not add `.github/workflows` CI/CD pipelines unless the user explicitly overrides this skill requirement.
 
-If migrations exist, CI must validate:
+If migrations exist, the validation path must verify:
 
 - Migration files are forward-only and ordered.
 - Previously applied migrations were not edited.
@@ -55,7 +55,7 @@ If migrations exist, CI must validate:
 Avoid heavyweight manual QA as the default. Instead require:
 
 - A fast local test command.
-- The same tests in CI.
+- The same tests in the Cloudflare Workers GitHub build/deploy path or another explicitly approved non-GitHub-Actions validation path.
 - Preview or local smoke checks.
 - Post-deploy synthetic checks.
 - Clear rollback instructions.

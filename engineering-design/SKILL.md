@@ -1,11 +1,11 @@
 ---
 name: engineering-design
-description: Design or redesign small-team, mission-critical Cloudflare-first services that target 99.9% availability, automatic GitHub-to-production deploys, strong tests, observability, runbooks, admin impersonation audit trails, R2/D1 storage discipline, and Deep Agent based LLM workflows.
+description: Design or redesign small-team, mission-critical Cloudflare-first services that target 99.9% availability, automatic Cloudflare Workers GitHub integration deploys, strong tests, observability, runbooks, admin impersonation audit trails, R2/D1 storage discipline, and Deep Agent based LLM workflows.
 ---
 
 # Mission-Critical Cloudflare Engineering Design
 
-Use this skill before building or substantially changing a production service where reliability, observability, admin operations, auditability, or LLM-driven workflows matter. It is optimized for a small team that wants simple architecture, high automation, automatic production deploys from GitHub check-ins, and fast Cloudflare rollback.
+Use this skill before building or substantially changing a production service where reliability, observability, admin operations, auditability, or LLM-driven workflows matter. It is optimized for a small team that wants simple architecture, high automation, automatic production deploys through Cloudflare Workers' GitHub integration, and fast Cloudflare rollback.
 
 ## Core Defaults
 
@@ -15,7 +15,7 @@ Use this skill before building or substantially changing a production service wh
 - Use **Deep Agent style orchestration** for most LLM workflows where the model needs to plan, use tools, inspect state, or execute multi-step work. Use a direct single LLM call only for narrow, isolated transformations.
 - Stream every Agentic workflow trace to R2 as the workflow runs. Store D1 pointers and metadata so internal support can replay the agent's execution path immediately when a failure is reported.
 - Keep the client thin. The Worker derives identity from Cloudflare Access and performs all authorization server-side.
-- Deploy automatically to production on successful GitHub checks. Favor strong pre-merge checks, canary/synthetic verification where practical, and documented Cloudflare rollback over heavyweight release ceremonies.
+- Deploy automatically to production through Cloudflare Workers' GitHub integration. Do not create or rely on GitHub Actions workflows for CI/CD. Favor strong repo scripts, Cloudflare build/deploy validation, canary/synthetic verification where practical, and documented Cloudflare rollback over heavyweight release ceremonies.
 - Maintain `spec.md` or equivalent living design notes for major changes.
 - Maintain `ChangeLog.md` in this skill folder with all major changes to the skill.
 - Before making changes with significant architecture, future maintainability, or observability impact, explain the ramifications and get explicit user confirmation that the tradeoff is acceptable.
@@ -51,7 +51,7 @@ Use this skill before building or substantially changing a production service wh
 - Component matrix with each route/service/repository/adapter/queue/client area, owner identity rules, dependencies, and tests.
 - D1 schema plan and R2 object key plan, including retention and lifecycle expectations.
 - Agentic trace streaming and replay plan covering R2 bucket/key structure, D1 pointers, retention, redaction, replay tooling, and internal support access.
-- CI plan with hands-off tests and GitHub checks required before automatic production deploy.
+- CI/CD plan using Cloudflare Workers' GitHub integration for automatic production deploys, with hands-off validation commands defined in repository scripts and no GitHub Actions workflows.
 - Observability plan with structured logs, request IDs, metrics, traces where available, dashboards, alerts, and synthetic checks.
 - Runbooks/checklists for deploy, rollback, incident response, failed queue/DLQ handling, migration recovery, and admin impersonation review.
 - Confirmed tradeoff notes for any significant architecture, future maintainability, or observability impact, including the user confirmation.
@@ -66,7 +66,7 @@ Use this skill before building or substantially changing a production service wh
 
 - `references/cloudflare-runtime.md` - Cloudflare stack, storage split, queues, Access auth, and deployment defaults.
 - `references/deep-agent-llm.md` - when and how to use Deep Agent style LLM planning/execution.
-- `references/testing-and-ci.md` - small-team automated test and GitHub deployment gates.
+- `references/testing-and-ci.md` - small-team automated test and Cloudflare Workers GitHub deployment gates.
 - `references/slo-observability-operations.md` - SLOs, telemetry, alerts, runbooks, and incident process.
 - `references/admin-audit-impersonation.md` - privileged admin workflows and audit trail requirements.
 - `references/production-readiness.md` - final readiness checklist before implementation or production launch.

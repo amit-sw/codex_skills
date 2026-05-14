@@ -44,10 +44,11 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 ### Tests and CI
 
 - Local hands-off test command exists.
-- GitHub checks run typecheck, lint, tests, build, and deployment validation.
+- Cloudflare Workers' GitHub integration runs typecheck, lint, tests, build, and deployment validation.
+- No GitHub Actions workflows are used for CI/CD unless the user explicitly approved a documented exception.
 - Auth, audit, queue, migration, R2, and LLM failure paths are tested.
 - Critical flows have smoke or e2e tests.
-- CI passing triggers production deploy.
+- Cloudflare Workers GitHub validation passing triggers production deploy.
 
 ### Observability and Operations
 
@@ -61,7 +62,7 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 
 ### Deployment and Rollback
 
-- Production deploy is automatic after GitHub checks.
+- Production deploy is automatic through Cloudflare Workers' GitHub integration.
 - Post-deploy synthetic validation exists.
 - Cloudflare rollback command/UI path is documented.
 - Owner is named for responding to failed deploys.
@@ -76,7 +77,7 @@ For a mission-critical service, do not proceed when any of these are blocked:
 - Auth/authorization model.
 - Audit trail for privileged actions.
 - D1/R2 storage split.
-- CI gate for automatic deploy.
+- Cloudflare Workers GitHub integration gate for automatic deploy.
 - Rollback runbook.
 - Observability for user-visible failures.
 - R2 trace streaming and replay for production Agentic workflows.

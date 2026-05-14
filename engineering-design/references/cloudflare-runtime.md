@@ -72,13 +72,14 @@ Use queues for slow, flaky, external, or retryable work.
 
 ## Automatic Production Deploy
 
-For small-team velocity, production deploys should happen automatically after GitHub checks pass.
+For small-team velocity, production deploys should happen automatically through Cloudflare Workers' GitHub integration after the configured validation/build steps pass.
 
 Required guardrails:
 
 - Branch protection for the production branch.
-- Fast, hands-off CI tests.
-- Typecheck, lint, migration validation, and Worker build.
+- No GitHub Actions workflows for CI/CD. Keep validation commands in repository scripts and run them through the Cloudflare Workers GitHub build/deploy integration or a local/pre-merge workflow.
+- Fast, hands-off validation tests.
+- Typecheck, lint, migration validation, and Worker build before deploy.
 - Smoke tests against a preview or local Miniflare environment where practical.
 - Post-deploy synthetic checks for critical flows.
 - Documented Cloudflare rollback path and a clear owner for responding to failed deploys.

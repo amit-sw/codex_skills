@@ -6,3 +6,4 @@
 - Updated Cloudflare runtime, LLM, testing, observability, operations, and production-readiness guidance to require trace retention, redaction, replay access controls, alerting, runbooks, and tests.
 - Added this changelog and a skill maintenance rule requiring major skill changes to be recorded here.
 - Added a requirement to explain ramifications and get explicit user confirmation before changes with significant architecture, future maintainability, or observability impact.
+- Added a requirement to avoid GitHub Actions for CI/CD and rely on Cloudflare Workers' GitHub integration for automatic build/deploy workflows.
