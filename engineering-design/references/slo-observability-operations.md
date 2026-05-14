@@ -37,8 +37,11 @@ Every request/job should have:
 - Error class and compact message.
 - R2 key references, never raw large content.
 - Model/provider metadata for LLM calls where relevant.
+- Agentic workflow trace R2 key and replay status where relevant.
 
 Use structured logs. Do not log secrets, tokens, private keys, raw credential objects, or unnecessary PII.
+
+For Agentic workflows, structured logs are not enough. Stream the execution trace to R2 as the workflow runs, and include the trace key in D1/job metadata and operational logs. Failed runs must preserve partial traces so internal support can replay the agent's execution path immediately.
 
 ## Cloudflare Observability
 
@@ -52,6 +55,7 @@ Plan dashboards for:
 - D1 errors and slow queries where visible.
 - R2 failures.
 - LLM latency, error rate, token usage, and tool failures.
+- Agentic trace write failures, replay lookup failures, and trace retention/lifecycle health.
 - Admin impersonation count and privileged action count.
 
 ## Alerting
@@ -66,6 +70,7 @@ Required alerts:
 - Any DLQ messages in production.
 - Post-deploy synthetic failure.
 - Audit logging failure for privileged operations.
+- Agentic trace streaming failure for production LLM workflows.
 - LLM provider outage affecting critical flows.
 
 Prefer burn-rate style alerts for SLO-backed flows where the signal supports it.
@@ -83,5 +88,6 @@ Required runbooks/checklists:
 - Access/auth failure.
 - Admin impersonation review.
 - LLM workflow degradation or provider outage.
+- Internal failure report: locate agent run by user/job/request ID, load R2 trace, replay execution path, identify failing step, and preserve evidence for follow-up.
 
 Each runbook must include detection, impact, owner, immediate mitigation, validation, and follow-up.

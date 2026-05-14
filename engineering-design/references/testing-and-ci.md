@@ -15,7 +15,7 @@ Required for mission-critical Cloudflare services:
 - R2 adapter tests for key generation, metadata, missing object, and content-type handling.
 - Access auth middleware tests for missing, invalid, expired, and valid JWT cases.
 - Admin audit tests proving both actor and effective user are recorded.
-- LLM workflow tests with mocked providers, schema validation, and replay fixtures.
+- LLM workflow tests with mocked providers, schema validation, trace streaming to R2, failed-run partial trace preservation, and replay fixtures.
 - E2E or smoke tests for the most critical user flows.
 
 Coverage targets are useful but insufficient. A small service can have high coverage and still miss queue retries, migration safety, or auth bypasses.
@@ -61,3 +61,5 @@ Avoid heavyweight manual QA as the default. Instead require:
 - Clear rollback instructions.
 
 When a change touches auth, audit, storage migration, queue processing, or LLM tool permissions, add targeted tests before deploy.
+
+When a change touches an Agentic workflow, add targeted tests proving trace events are written incrementally to R2, D1 lookup metadata points to the trace, and a failed run can be replayed from the preserved trace.

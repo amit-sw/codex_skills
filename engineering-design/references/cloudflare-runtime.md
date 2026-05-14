@@ -8,7 +8,7 @@ Use this reference when designing storage, async jobs, auth, or deployment topol
 - React + Vite for the SPA.
 - Hono for Worker routing.
 - D1 for small relational state.
-- R2 for all large content and replayable artifacts.
+- R2 for all large content, replayable artifacts, and streamed Agentic workflow traces.
 - Queues for async jobs, retries, and decoupling slow or flaky work from requests.
 - Cloudflare Access as the primary auth boundary.
 - Zod schemas in `src/shared` for all client/worker/queue contracts.
@@ -22,6 +22,7 @@ Store in D1:
 - Internal UUIDs, ownership fields, relationships, status enums, timestamps.
 - R2 object keys, content type, byte size, checksum, version, retention class.
 - Job state, attempt count, last error summary, DLQ pointer.
+- Agentic run lookup metadata: run ID, workflow version, status, failure summary, and R2 trace key.
 - Audit event metadata.
 - Small denormalized display fields that are needed for list views.
 
@@ -42,6 +43,14 @@ Use stable, scoped, non-secret keys:
 ```
 
 Track `r2_key`, `content_type`, `byte_size`, `sha256`, `created_by`, and lifecycle status in D1. Keep originals immutable; new versions get new keys.
+
+Agentic trace keys should make run lookup and lifecycle management straightforward:
+
+```text
+{environment}/{tenant_or_user}/agent-traces/{workflow}/{run_id}/{sequence_or_chunk}.jsonl
+```
+
+Write traces incrementally so failed runs preserve partial execution history. Store only non-secret lookup metadata in D1 and apply explicit retention/lifecycle rules.
 
 ## Queue Pattern
 

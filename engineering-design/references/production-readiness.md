@@ -16,6 +16,7 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 ### Architecture
 
 - Cloudflare default stack is used or deviations are justified.
+- Significant architecture or future-maintainability tradeoffs were explained to the user and explicitly confirmed before implementation.
 - One Worker deployable is preserved unless there is a clear operational requirement.
 - Routes/services/repositories/adapters boundaries are documented.
 - D1/R2/Queues split is documented.
@@ -36,7 +37,8 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 - Deep Agent is used for broad planning/execution workflows.
 - Direct LLM calls are limited to narrow leaf transformations.
 - Prompts, tools, schemas, and stop conditions are documented.
-- LLM runs are traceable and replayable enough for support.
+- Agentic workflow traces stream to R2 during execution and preserve partial traces for failed runs.
+- LLM runs are traceable and replayable enough for internal support to reconstruct the agent's execution path immediately from a run ID, request ID, or job ID.
 - Large LLM artifacts are stored in R2 with D1 pointers.
 
 ### Tests and CI
@@ -50,9 +52,11 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 ### Observability and Operations
 
 - Structured logs include request/job IDs and outcomes.
+- Significant observability tradeoffs were explained to the user and explicitly confirmed before implementation.
 - Dashboards cover critical flows, errors, latency, queues, DLQ, R2, D1, and LLM calls.
 - Alerts exist for SLO burn, production deploy failure, synthetic failure, queue/DLQ problems, and audit failures.
 - Runbooks exist for incident response, rollback, DLQ drain, migration failure, Access failure, R2 object issue, and LLM degradation.
+- Runbooks exist for internal Agentic workflow failure reports, including trace lookup and replay from R2.
 - Post-incident review process includes updating tests and runbooks.
 
 ### Deployment and Rollback
@@ -68,11 +72,13 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 For a mission-critical service, do not proceed when any of these are blocked:
 
 - Critical flow SLO definition.
+- User-confirmed acceptance of any significant architecture, future-maintainability, or observability tradeoff.
 - Auth/authorization model.
 - Audit trail for privileged actions.
 - D1/R2 storage split.
 - CI gate for automatic deploy.
 - Rollback runbook.
 - Observability for user-visible failures.
+- R2 trace streaming and replay for production Agentic workflows.
 
 Small-team speed comes from simple defaults and automation, not skipping the reliability basics.
