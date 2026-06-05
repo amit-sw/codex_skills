@@ -48,6 +48,8 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 - No GitHub Actions workflows are used for CI/CD unless the user explicitly approved a documented exception.
 - Auth, audit, queue, migration, R2, and LLM failure paths are tested.
 - Critical flows have smoke or e2e tests.
+- Full Production Tests are defined for critical flows, safe to run in production, and require only a logged-in authorized user or dedicated production test identity.
+- Admin users can run Full Production Tests with one click and see prior run results.
 - Cloudflare Workers GitHub validation passing triggers production deploy.
 
 ### Observability and Operations
@@ -55,7 +57,7 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 - Structured logs include request/job IDs and outcomes.
 - Significant observability tradeoffs were explained to the user and explicitly confirmed before implementation.
 - Dashboards cover critical flows, errors, latency, queues, DLQ, R2, D1, and LLM calls.
-- Alerts exist for SLO burn, production deploy failure, synthetic failure, queue/DLQ problems, and audit failures.
+- Alerts exist for SLO burn, production deploy failure, synthetic failure, Full Production Test failure, queue/DLQ problems, and audit failures.
 - Runbooks exist for incident response, rollback, DLQ drain, migration failure, Access failure, R2 object issue, and LLM degradation.
 - Runbooks exist for internal Agentic workflow failure reports, including trace lookup and replay from R2.
 - Post-incident review process includes updating tests and runbooks.
@@ -64,6 +66,7 @@ Mark every item as `ready`, `not applicable`, or `blocked`. Do not delete items.
 
 - Production deploy is automatic through Cloudflare Workers' GitHub integration.
 - Post-deploy synthetic validation exists.
+- Full Production Tests run after deploy when practical or are available for immediate admin-triggered validation.
 - Cloudflare rollback command/UI path is documented.
 - Owner is named for responding to failed deploys.
 - Migration risk and recovery plan are documented.
@@ -78,6 +81,7 @@ For a mission-critical service, do not proceed when any of these are blocked:
 - Audit trail for privileged actions.
 - D1/R2 storage split.
 - Cloudflare Workers GitHub integration gate for automatic deploy.
+- Full Production Tests definition, admin run path, stored results, and failure alerting.
 - Rollback runbook.
 - Observability for user-visible failures.
 - R2 trace streaming and replay for production Agentic workflows.

@@ -43,6 +43,22 @@ If migrations exist, the validation path must verify:
 - Current schema plus new migrations works.
 - Rollback plan is documented even if migrations are forward-only.
 
+## Full Production Tests
+
+Define Full Production Tests for every mission-critical app. These are safe-to-run-against-production checks that require only an authorized logged-in user or dedicated production test identity and exercise critical live workflows end to end.
+
+Required properties:
+
+- Admin-triggerable from the app with one click, and runnable automatically after deployment when practical.
+- Persist run history in D1 with commit/version, environment, actor, start/end time, status, failed checks, and summary. Store verbose logs or artifacts in R2 when needed.
+- Alert admins on any failed check, timeout, or unexpected exception.
+- Use namespaced disposable data such as `prod_test_<timestamp>` and clean it up or archive it.
+- Never delete or mutate real user data, never require production secrets beyond normal app auth and bindings, and never depend on privileged local tooling.
+- Prefer fast live smoke and regression checks; avoid expensive workflows such as full training unless the app has an explicitly safe fixture path.
+- Report per-step failures with enough context for rollback or incident triage.
+
+Keep Full Production Tests distinct from deploy-gate tests: pre-deploy tests block bad builds; Full Production Tests prove the deployed production environment still works.
+
 ## Test Data Rules
 
 - Fixtures must be committed and deterministic.

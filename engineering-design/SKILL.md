@@ -16,6 +16,7 @@ Use this skill before building or substantially changing a production service wh
 - Stream every Agentic workflow trace to R2 as the workflow runs. Store D1 pointers and metadata so internal support can replay the agent's execution path immediately when a failure is reported.
 - Keep the client thin. The Worker derives identity from Cloudflare Access and performs all authorization server-side.
 - Deploy automatically to production through Cloudflare Workers' GitHub integration. Do not create or rely on GitHub Actions workflows for CI/CD. Favor strong repo scripts, Cloudflare build/deploy validation, canary/synthetic verification where practical, and documented Cloudflare rollback over heavyweight release ceremonies.
+- Require a baseline **Full Production Tests** capability for mission-critical apps: an admin-triggerable, production-safe test run that uses only normal authenticated access, exercises critical live workflows, stores run history, and alerts admins on failure. Read `references/testing-and-ci.md` for the definition and guardrails.
 - Maintain `spec.md` or equivalent living design notes for major changes.
 - Maintain `ChangeLog.md` in this skill folder with all major changes to the skill.
 - Before making changes with significant architecture, future maintainability, or observability impact, explain the ramifications and get explicit user confirmation that the tradeoff is acceptable.
@@ -52,6 +53,7 @@ Use this skill before building or substantially changing a production service wh
 - D1 schema plan and R2 object key plan, including retention and lifecycle expectations.
 - Agentic trace streaming and replay plan covering R2 bucket/key structure, D1 pointers, retention, redaction, replay tooling, and internal support access.
 - CI/CD plan using Cloudflare Workers' GitHub integration for automatic production deploys, with hands-off validation commands defined in repository scripts and no GitHub Actions workflows.
+- Full Production Tests plan covering safe production test identity, namespaced disposable data, critical flows, one-click admin run UI, run history storage, and admin failure alerts.
 - Observability plan with structured logs, request IDs, metrics, traces where available, dashboards, alerts, and synthetic checks.
 - Runbooks/checklists for deploy, rollback, incident response, failed queue/DLQ handling, migration recovery, and admin impersonation review.
 - Confirmed tradeoff notes for any significant architecture, future maintainability, or observability impact, including the user confirmation.
